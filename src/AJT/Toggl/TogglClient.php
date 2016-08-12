@@ -55,12 +55,14 @@ class TogglClient extends Client
             "Content-type" => "application/json",
         ));
 
-        if(!empty($config->get('api_key'))) {
+        $api_key = $config->get('api_key');
+        if(!empty($api_key)) {
             $config->set('username', $config->get('api_key'));
             $config->set('password', 'api_token');
         }
 
-        if(empty($config->get('password'))) {
+        $password = $config->get('password');
+        if(empty($password)) {
             $config->set('password', 'api_token');
         }
         $authPlugin = new CurlAuthPlugin($config->get('username'), $config->get('password'));
